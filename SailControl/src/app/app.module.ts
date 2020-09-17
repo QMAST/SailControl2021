@@ -4,6 +4,8 @@ import {HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
 import {SailModelApiService} from './sailModel/sailModel-api.service';
+import {ExistingStateApiService} from './existingState/existingState.service';
+import {SailCommandApiService} from './sailCommand/sailCommand.service';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import {SailModelApiService} from './sailModel/sailModel-api.service';
     BrowserModule,
     HttpClientModule,
   ],
-  providers: [SailModelApiService],
+  providers: [SailModelApiService, 
+              ExistingStateApiService, 
+              SailCommandApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

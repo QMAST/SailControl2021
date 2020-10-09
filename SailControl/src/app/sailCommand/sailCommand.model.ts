@@ -1,7 +1,7 @@
 export class sailCommand {
    id: number;
    commandID: string;
-   commandValue: number;
+   commandValue: string;
    updated_at: Date;
    updated_by: string;
 }

@@ -3,6 +3,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {SailModelApiService} from './sailModel/sailModel-api.service';
 import { ExistingStateApiService } from './existingState/existingState.service';
 import { SailCommandApiService } from './sailCommand/sailCommand.service';
+import { sailCommand } from './sailCommand/sailCommand.model';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,8 @@ export class AppComponent implements OnInit, OnDestroy {
   sailModeDisplayableList: string[];
   list1: string[];
   list2: string[];
+  inputCommandID: string;
+  inputCommnadValue: string;
 
   constructor(private sailApi: SailModelApiService,
               private existingStateApi: ExistingStateApiService,
@@ -46,5 +49,14 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sailModelSubs.unsubscribe();
+  }
+
+  onSubmitCommand() {
+    var newCommand: sailCommand = new sailCommand;
+    newCommand.commandID = this.inputCommandID;
+    newCommand.commandValue = this.inputCommnadValue;
+    console.log("Sending command to api")
+    this.sailCommandApi.postCommand(newCommand);
+    console.log("Returned from api")
   }
 }

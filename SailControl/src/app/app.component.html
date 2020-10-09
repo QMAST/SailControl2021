@@ -1,6 +1,14 @@
 <div style="text-align:center">
   <h1>Sail Logic :)</h1>
 </div>
+<div>
+  <p>Post command:</p>
+  <input [(ngModel)]="inputCommandID"
+  placeholder="Command ID">
+  <input [(ngModel)]="inputCommnadValue"
+  placeholder="Command Value">
+  <button (click)="onSubmitCommand()">Send Command</button>
+</div>
 <ul>
   <li *ngFor="let model of list1">
     {{model}}

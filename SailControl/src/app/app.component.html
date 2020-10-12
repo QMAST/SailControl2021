@@ -9,6 +9,18 @@
   placeholder="Command Value">
   <button (click)="onSubmitCommand()">Send Command</button>
 </div>
+<div>
+  <p>Post ExistingState:</p>
+  <input [(ngModel)]="inputBoatSpeed"
+  placeholder="Boat Speed">
+  <input [(ngModel)]="inputBoatDirection"
+  placeholder="Boat direction">
+  <input [(ngModel)]="inputWindSpeed"
+  placeholder="Wind Speed">
+  <input [(ngModel)]="inputWindDirection"
+  placeholder="Wind direction">
+  <button (click)="onSubmitState()">Send Command</button>
+</div>
 <ul>
   <li *ngFor="let model of list1">
     {{model}}

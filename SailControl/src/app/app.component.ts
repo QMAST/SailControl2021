@@ -4,6 +4,7 @@ import {SailModelApiService} from './sailModel/sailModel-api.service';
 import { ExistingStateApiService } from './existingState/existingState.service';
 import { SailCommandApiService } from './sailCommand/sailCommand.service';
 import { sailCommand } from './sailCommand/sailCommand.model';
+import { ExistingState } from './existingState/existingState.model';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,10 @@ export class AppComponent implements OnInit, OnDestroy {
   list2: string[];
   inputCommandID: string;
   inputCommnadValue: string;
+  inputBoatSpeed: number;
+  inputBoatDirection: number;
+  inputWindSpeed: number;
+  inputWindDirection: number;
 
   constructor(private sailApi: SailModelApiService,
               private existingStateApi: ExistingStateApiService,
@@ -28,17 +33,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    /*
-    this.sailModelSubs = this.sailApi
-      .getExams()
-      .subscribe(res => {
-          res.forEach(model => {
-            this.sailModeDisplayableList.push(JSON.stringify(model));
-          });
-        },
-        console.error
-      );
-      */
     this.existingStateApi.getExistingState().subscribe(existingStates => {
       existingStates.forEach(state => this.list1.push(JSON.stringify(state)));
     })
@@ -58,5 +52,14 @@ export class AppComponent implements OnInit, OnDestroy {
     console.log("Sending command to api")
     this.sailCommandApi.postCommand(newCommand);
     console.log("Returned from api")
+  }
+
+  onSubmitState() {
+    var newState: ExistingState = new ExistingState;
+    newState.boatDirection = this.inputBoatDirection;
+    newState.boatSpeed = this.inputBoatSpeed;
+    newState.windDirection = this.inputWindDirection;
+    newState.windSpeed = this.inputWindSpeed;
+    this.existingStateApi.postCommand(newState);
   }
 }

@@ -7,7 +7,7 @@ import { ExistingState } from './existingState.model';
 
 @Injectable()
 export class ExistingStateApiService {
-
+  existingStateURL = `${API_URL}/existingState`
   constructor(private http: HttpClient) {
   }
 
@@ -17,6 +17,13 @@ export class ExistingStateApiService {
 
   getExistingState(): Observable<ExistingState[]> {
     return this.http
-      .get<ExistingState[]>(`${API_URL}/existingState`);
+      .get<ExistingState[]>(this.existingStateURL);
+  }
+  postCommand(command: ExistingState): void {
+    console.log(command)
+    this.http.post<ExistingState>(this.existingStateURL,command).subscribe(resp => {
+      console.log(resp)
+    }
+    )
   }
 }
